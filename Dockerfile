@@ -1,17 +1,15 @@
-# Puppeteer ki official image jisme Chrome pehle se hota hai
 FROM ghcr.io/puppeteer/puppeteer:latest
 
 USER root
 WORKDIR /usr/src/app
 
-# Package files copy karke install karein
-COPY package*.json ./
-RUN npm install
-
-# Baaki saara code copy karein
+# Pehle saari files copy kar lete hain
 COPY . .
 
-# Environment variable set karein taaki Puppeteer ko Chrome mil jaye
+# Ab dependencies install karte hain
+RUN npm install
+
+# Environment variables
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome
 
